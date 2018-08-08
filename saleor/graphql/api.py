@@ -56,10 +56,10 @@ from .product.resolvers import (
 from .product.types import (
     Category, Collection, Product, ProductAttribute, ProductType,
     ProductVariant)
-from .shipping.resolvers import resolve_shipping_methods
-from .shipping.types import ShippingMethod
+from .shipping.resolvers import resolve_shipping_rates
+from .shipping.types import ShippingZone
 from .shipping.mutations import (
-    ShippingMethodCreate, ShippingMethodDelete, ShippingMethodUpdate,
+    ShippingZoneCreate, ShippingZoneDelete, ShippingZoneUpdate,
     ShippingPriceCreate, ShippingPriceDelete, ShippingPriceUpdate)
 from .utils import get_node
 
@@ -140,11 +140,11 @@ class Query(graphene.ObjectType):
     vouchers = DjangoFilterConnectionField(
         Voucher, query=graphene.String(description=DESCRIPTIONS['product']),
         description="List of the shop\'s vouchers.")
-    shipping_method = graphene.Field(
-        ShippingMethod, id=graphene.Argument(graphene.ID),
-        description='Lookup a shipping method by ID.')
-    shipping_methods = DjangoFilterConnectionField(
-        ShippingMethod, description='List of the shop\'s shipping methods.')
+    shipping_zone = graphene.Field(
+        ShippingZone, id=graphene.Argument(graphene.ID),
+        description='Lookup a shipping zone by ID.')
+    shipping_zones = DjangoFilterConnectionField(
+        ShippingZone, description='List of the shop\'s shipping zones.')
     user = graphene.Field(
         User, id=graphene.Argument(graphene.ID),
         description='Lookup an user by ID.')
@@ -233,11 +233,11 @@ class Query(graphene.ObjectType):
     def resolve_vouchers(self, info, query=None, **kwargs):
         return resolve_vouchers(info, query)
 
-    def resolve_shipping_method(self, info, id):
-        return get_node(info, id, only_type=ShippingMethod)
+    def resolve_shipping_zone(self, info, id):
+        return get_node(info, id, only_type=ShippingZone)
 
-    def resolve_shipping_methods(self, info, **kwargs):
-        return resolve_shipping_methods(info)
+    def resolve_shipping_rates(self, info, **kwargs):
+        return resolve_shipping_rates(info)
 
 
 class Mutations(graphene.ObjectType):
@@ -328,9 +328,9 @@ class Mutations(graphene.ObjectType):
     voucher_delete = VoucherDelete.Field()
     voucher_update = VoucherUpdate.Field()
 
-    shipping_method_create = ShippingMethodCreate.Field()
-    shipping_method_delete = ShippingMethodDelete.Field()
-    shipping_method_update = ShippingMethodUpdate.Field()
+    shipping_zone_create = ShippingZoneCreate.Field()
+    shipping_zone_delete = ShippingZoneDelete.Field()
+    shipping_zone_update = ShippingZoneUpdate.Field()
 
     shipping_price_create = ShippingPriceCreate.Field()
     shipping_price_delete = ShippingPriceDelete.Field()
