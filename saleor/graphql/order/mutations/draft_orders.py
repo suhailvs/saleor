@@ -36,8 +36,8 @@ class DraftOrderInput(InputObjectType):
         and quantity of products.""")
     shipping_address = AddressInput(
         description='Shipping address of the customer.')
-    shipping_rate = graphene.ID(
-        description='ID of a selected shipping rate.', name='shippingRate')
+    shipping_method = graphene.ID(
+        description='ID of a selected shipping method.', name='shippingMethod')
     voucher = graphene.ID(
         description='ID of the voucher associated with the order',
         name='voucher')
@@ -179,7 +179,7 @@ def check_for_draft_order_errors(order):
                 field='lines',
                 message='Could not create order without any products.'))
     if order.is_shipping_required():
-        method = order.shipping_rate
+        method = order.shipping_method
         shipping_address = order.shipping_address
         shipping_not_valid = (
             method and shipping_address and
@@ -188,7 +188,7 @@ def check_for_draft_order_errors(order):
             errors.append(
                 Error(
                     field='shipping',
-                    message='Shipping rate is not valid for chosen shipping '
+                    message='Shipping method is not valid for chosen shipping '
                             'address'))
     return errors
 
@@ -217,7 +217,7 @@ class DraftOrderComplete(BaseMutation):
         if order.user:
             order.user_email = order.user.email
         if not order.is_shipping_required():
-            order.shipping_rate_name = None
+            order.shipping_method_name = None
             order.shipping_price = ZERO_TAXED_MONEY
             if order.shipping_address:
                 order.shipping_address.delete()
