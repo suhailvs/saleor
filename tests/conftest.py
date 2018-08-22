@@ -238,7 +238,7 @@ def shipping_method(db):  # pylint: disable=W0613
 def shipping_price(shipping_method):
     return ShippingMethodCountry.objects.create(
         country_code='PL',
-        price=10,
+        price=Money(amount=10, currency='USD'),
         shipping_method=shipping_method)
 
 
