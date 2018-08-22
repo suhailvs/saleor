@@ -13,12 +13,12 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import MenuIcon from "@material-ui/icons/Menu";
 import PersonIcon from "@material-ui/icons/Person";
+import SettingsIcon from "@material-ui/icons/Settings";
 import * as React from "react";
 import SVG from "react-inlinesvg";
 
 import * as saleorLogo from "../images/logo.svg";
 import { UserContext } from "./auth";
-import Container from "./components/Container";
 import MenuToggle from "./components/MenuToggle";
 import Navigator from "./components/Navigator";
 import Toggle from "./components/Toggle";
@@ -93,6 +93,7 @@ const decorate = withStyles(
     drawerDesktop: {
       backgroundColor: "transparent",
       borderRight: "0 none",
+      height: `calc(100vh - ${64 + theme.spacing.unit * 2}px)`,
       marginTop: 64 + theme.spacing.unit * 2,
       position: "relative" as "relative",
       width: drawerWidth
@@ -122,8 +123,12 @@ const decorate = withStyles(
       marginRight: theme.spacing.unit
     },
     menuList: {
+      display: "flex" as "flex",
+      flexDirection: "column" as "column",
+      height: "100%",
       marginLeft: theme.spacing.unit * 4,
-      marginTop: theme.spacing.unit * 2
+      marginTop: theme.spacing.unit * 2,
+      paddingBottom: theme.spacing.unit * 3
     },
     menuListItem: {
       "&:hover": {
@@ -438,6 +443,22 @@ export const AppRoot = decorate(
                           menuItems={menuStructure}
                           onMenuItemClick={handleMenuItemClick}
                         />
+                        <div className={classes.spacer} />
+                        <a
+                          className={classes.menuListItem}
+                          href={"/dashboard/next/configuration"}
+                          onClick={event =>
+                            handleMenuItemClick("/configuration", event)
+                          }
+                        >
+                          <SettingsIcon />
+                          <Typography
+                            aria-label="configure"
+                            className={classes.menuListItemText}
+                          >
+                            {i18n.t("Configure")}
+                          </Typography>
+                        </a>
                       </div>
                     </ResponsiveDrawer>
                     <main className={classes.content}>{children}</main>
