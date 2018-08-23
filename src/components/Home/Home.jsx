@@ -305,14 +305,14 @@ class Home extends Component {
             <h2>Enterprise consulting</h2>
             <h4>Some situations however call for a custom solution and extra code to be written. In that case, our team can help.</h4>
             <div className="list grid">
-              <div className="col-xs-12 col-sm-6 col-lg-5">
+              <div className="col-xs-12 col-sm-6 col-lg-6">
                 <ul>
                   <li><span>if you're looking for b2b or entreprise solutions</span></li>
                   <li><span>if a licensed platform is not enough</span></li>
                   <li><span>if you’re outgrowing your existing solution</span></li>
                 </ul>
               </div>
-              <div className="col-xs-12 col-sm-6 col-lg-7">
+              <div className="col-xs-12 col-sm-6 col-lg-6">
                 <ul>
                   <li><span>if you need unlimited integration possibilities</span></li>
                   <li><span>if you’re a high-volume business</span></li>
