@@ -30,7 +30,7 @@ export interface ProductTypeForm {
 }
 interface ProductTypeDetailsPageProps {
   productType?: {
-    id: string;
+    id?: string;
     name?: string;
     hasVariants?: boolean;
     isShippingRequired?: boolean;
@@ -45,6 +45,7 @@ interface ProductTypeDetailsPageProps {
     name: string;
   }>;
   disabled: boolean;
+  pageTitle: string;
   saveButtonBarState: SaveButtonBarState;
   searchLoading: boolean;
   searchResults: Array<{
@@ -54,7 +55,7 @@ interface ProductTypeDetailsPageProps {
   taxRates: string[];
   onAttributeSearch: (name: string) => void;
   onBack: () => void;
-  onDelete: () => void;
+  onDelete?: () => void;
   onSubmit: (data: ProductTypeForm) => void;
 }
 
@@ -69,13 +70,14 @@ const ProductTypeDetailsPage = decorate<ProductTypeDetailsPageProps>(
   ({
     classes,
     disabled,
-    productType,
+    pageTitle,
     productAttributes,
-    variantAttributes,
+    productType,
     saveButtonBarState,
     searchLoading,
     searchResults,
     taxRates,
+    variantAttributes,
     onAttributeSearch,
     onBack,
     onDelete,
@@ -113,10 +115,7 @@ const ProductTypeDetailsPage = decorate<ProductTypeDetailsPageProps>(
             >
               {({ change, data, hasChanged, submit }) => (
                 <Container width="md">
-                  <PageHeader
-                    title={productType ? productType.name : undefined}
-                    onBack={onBack}
-                  />
+                  <PageHeader title={pageTitle} onBack={onBack} />
                   <div className={classes.root}>
                     <div>
                       <ProductTypeDetails
