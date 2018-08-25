@@ -10,10 +10,11 @@
     <p><a href="{% url 'checkout:shipping-method' %}">{% trans "Change shipping method" context "Checkout shipping method" %}</a></p>
     <h2>{% trans "Add a note to your order" context "Checkout summary note title" %}</h2>
         {% bootstrap_form note_form show_label=False %}
-    <p class="text-md-right">
+    <p class="text-md-right">      
       <button type="submit" class="btn primary">
         {% trans "Order & Pay" context "Checkout summary primary action" %}
       </button>
     </p>
+    <h3>Place the order as Cash on Delivery</h3>
   </form>
 {% endblock forms %}

@@ -119,9 +119,11 @@
               <svg data-src="{% static "images/mobile-menu.svg" %}" width="28px" height="20px"/>
               <span>{% trans "menu" context "Hamburger button text" %}</span>
             </div>
-            <a href="{% url 'home' %}">
-              <svg data-src="{% static "images/logo.svg" %}" height="38px" width="176px"/>
-            </a>
+            <h2>
+              <a href="{% url 'home' %}">
+              <!--<svg data-src="{% static "images/logo.svg" %}" height="38px" width="176px"/>-->
+              VDY Shop
+            </a></h2>
           </div>
           <div class="col-2 col-md-4 navbar__search static">
             {% if SEARCH_IS_ENABLED %}
@@ -195,7 +197,7 @@
       <div class="row">
         <div class="col-md-3">
           <a href="{% url 'home' %}" class="footer__logo">
-            <svg data-src="{% static "images/logo.svg" %}" height="38px" width="176px"/>
+          VDY Shop<!--<svg data-src="{% static "images/logo.svg" %}" height="38px" width="176px"/>-->
           </a>
         </div>
         <div class="col-md-3 col-sm-6">
