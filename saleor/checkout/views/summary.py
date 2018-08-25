@@ -12,7 +12,7 @@ from ..utils import (
     create_order, get_cart_data_for_checkout, get_taxes_for_cart,
     update_billing_address_in_anonymous_cart, update_billing_address_in_cart,
     update_billing_address_in_cart_with_shipping)
-
+import requests
 
 def handle_order_placement(request, cart):
     """Try to create an order and redirect the user as necessary.
@@ -39,8 +39,27 @@ def handle_order_placement(request, cart):
     msg = pgettext_lazy('Order status history entry', 'Order was placed')
     order.history.create(user=user, content=msg)
     send_order_confirmation.delay(order.pk)
-    # try to redirect to success page
     # return redirect('order:payment', token=order.token)
+
+    # order.status = 'fulfilled'
+    # order.save()
+    # send order to telegram channel    
+    bot_id = "610998062:AAE7b6fnlTjVH-slYmWT12nsU_N5g1nCdn0"    
+    message = """
+Address:
+{0}
+
+Orders:
+{1}
+    
+Total :
+{2}""".format(
+        repr(order.billing_address),
+        '\n'.join(['%s - %d - %drs' %(x,x.quantity,x.get_total().net.amount) for x in order.lines.all()]),
+        order.total.net.amount)
+    requests.get("https://api.telegram.org/bot%s/sendMessage" %bot_id, params={ "chat_id": '@vdyshoporders', "text": message })
+    
+    # try to redirect to success page
     return redirect('order:checkout-success', token=order.token)
 
 

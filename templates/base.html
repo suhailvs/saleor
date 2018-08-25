@@ -119,11 +119,11 @@
               <svg data-src="{% static "images/mobile-menu.svg" %}" width="28px" height="20px"/>
               <span>{% trans "menu" context "Hamburger button text" %}</span>
             </div>
-            <h2>
-              <a href="{% url 'home' %}">
+            <h1>
+              <a href="{% url 'home' %}" style="text-decoration: none">
               <!--<svg data-src="{% static "images/logo.svg" %}" height="38px" width="176px"/>-->
               VDY Shop
-            </a></h2>
+            </a></h1>
           </div>
           <div class="col-2 col-md-4 navbar__search static">
             {% if SEARCH_IS_ENABLED %}
@@ -255,12 +255,11 @@
           </ul>
         </div>
         <div class="col-md-3 col-sm-12">
+        <!--
           <a target="_blank" rel="noopener" class="social-footer" href="https://www.facebook.com/mirumeelabs/">
             <svg data-src="{% static "images/facebook-logo.svg" %}" width="45px" height="45px"/>
           </a>
-          <a target="_blank" rel="noopener" class="social-footer" href="https://github.com/mirumee/saleor">
-            <svg data-src="{% static "images/github-logo.svg" %}" width="45px" height="45px"/>
-          </a>
+          
           <a target="_blank" rel="noopener" class="social-footer" href="https://twitter.com/getsaleor">
             <svg data-src="{% static "images/twitter-logo.svg" %}" width="45px" height="45px"/>
           </a>
@@ -278,6 +277,10 @@
           </a>
           <a target="_blank" rel="noopener" class="social-footer" href="https://www.instagram.com/explore/tags/mirumee/">
             <svg data-src="{% static "images/instagram-logo.svg" %}" width="45px" height="45px"/>
+          </a>
+          -->
+          <a target="_blank" rel="noopener" class="social-footer" href="https://github.com/suhailvs/saleor">
+            <svg data-src="{% static "images/github-logo.svg" %}" width="45px" height="45px"/>
           </a>
         </div>
       </div>
