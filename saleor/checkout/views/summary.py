@@ -39,7 +39,9 @@ def handle_order_placement(request, cart):
     msg = pgettext_lazy('Order status history entry', 'Order was placed')
     order.history.create(user=user, content=msg)
     send_order_confirmation.delay(order.pk)
-    return redirect('order:payment', token=order.token)
+    # try to redirect to success page
+    # return redirect('order:payment', token=order.token)
+    return redirect('order:checkout-success', token=order.token)
 
 
 def summary_with_shipping_view(request, cart):
